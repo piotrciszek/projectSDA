@@ -5,9 +5,18 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
+
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+
 
 @Entity
-public class BpmUser {
+public class BpmUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -17,8 +26,7 @@ public class BpmUser {
     private String password;
     private String name;
     private String surname;
-    private BpmUserRole bpmUserRole;
-    private BpmUserSubjectExpert bpmUserSubjectExpert;
+
 
 //    public BpmUser(String email, String password, String password_confirm) {
 //        this.email = email;
@@ -60,8 +68,40 @@ public class BpmUser {
         this.email = email;
     }
 
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        SimpleGrantedAuthority simpleGrantedAuthority =
+                new SimpleGrantedAuthority("ROLE_USER");
+        return Collections.singleton(simpleGrantedAuthority);
+    }
+
     public String getPassword() {
         return password;
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 
     public void setPassword(String password) {
@@ -84,34 +124,20 @@ public class BpmUser {
         this.surname = surname;
     }
 
-    public BpmUserRole getBpmUserRole() {
-        return bpmUserRole;
-    }
 
-    public void setBpmUserRole(BpmUserRole bpmUserRole) {
-        this.bpmUserRole = bpmUserRole;
-    }
-
-    public BpmUserSubjectExpert getBpmUserSubjectExpert() {
-        return bpmUserSubjectExpert;
-    }
-
-    public void setBpmUserSubjectExpert(BpmUserSubjectExpert bpmUserSubjectExpert) {
-        this.bpmUserSubjectExpert = bpmUserSubjectExpert;
-    }
 
     public BpmUser() {
     }
 
-    public BpmUser(String email, String name, String surname, BpmUserSubjectExpert bpmUserSubjectExpert) {
+    public BpmUser(String email, String name, String surname) {
         this.email = email;
         this.name = name;
         this.surname = surname;
-        this.bpmUserSubjectExpert = bpmUserSubjectExpert;
+
     }
 
     public static BpmUser createList(BpmUser bpmUser) {
-        return new BpmUser(bpmUser.getEmail(), bpmUser.getName(), bpmUser.getSurname(), bpmUser.getBpmUserSubjectExpert());
+        return new BpmUser(bpmUser.getEmail(), bpmUser.getName(), bpmUser.getSurname());
     }
 
 

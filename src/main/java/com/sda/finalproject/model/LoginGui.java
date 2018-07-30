@@ -2,6 +2,7 @@ package com.sda.finalproject.model;
 
 import com.sda.finalproject.domain.BpmUser;
 import com.sda.finalproject.manger.LoginManager;
+import com.sda.finalproject.security.ISecurity;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
@@ -15,6 +16,10 @@ public class LoginGui extends UI {
 
     @Autowired
     private LoginManager loginManager;
+
+    @Autowired
+    ISecurity iSecurity;
+
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -40,6 +45,7 @@ public class LoginGui extends UI {
                 if (userByEmail.isPresent()) {
                     if (userByEmail.get().getPassword().equals(passwordField.getValue())) {
 
+                        iSecurity.autoLogin(userByEmail.get().getEmail(), userByEmail.get().getPassword());
                         Notification.show("Hello " + userByEmail.get().getName(), Notification.Type.TRAY_NOTIFICATION);
                         Page.getCurrent().open("/user-data?userId=" + userByEmail.get().getId(), null);
 

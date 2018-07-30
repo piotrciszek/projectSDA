@@ -48,7 +48,7 @@ public class RegisterManager {
 
 
     public BpmUser getPersonById(Long id) {
-        return bpmUserRepository.findById(id).get();
+        return bpmUserRepository.getOne(id);
     }
 
 //    public Optional<BpmUser> unregisterUser(BpmUser bpmUser) {
