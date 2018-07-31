@@ -20,7 +20,7 @@ public class BpmUser implements UserDetails {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
-    private long id;
+    private Long id;
 
     private String email;
     private String password;
@@ -51,12 +51,12 @@ public class BpmUser implements UserDetails {
 
 
 
-    public long getId() {
+    public Long getId() {
 
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

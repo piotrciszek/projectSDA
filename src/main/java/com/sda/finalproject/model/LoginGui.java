@@ -47,8 +47,8 @@ public class LoginGui extends UI {
 
                         iSecurity.autoLogin(userByEmail.get().getEmail(), userByEmail.get().getPassword());
                         Notification.show("Hello " + userByEmail.get().getName(), Notification.Type.TRAY_NOTIFICATION);
-                        Page.getCurrent().open("/user-data?userId=" + userByEmail.get().getId(), null);
-
+//                        Page.getCurrent().open("/user-data?userId=" + userByEmail.get().getId(), null);
+                        Page.getCurrent().open("/user-list", null);
                     } else {
                         Notification.show("Incorrect password!", Notification.Type.ERROR_MESSAGE);
                     }

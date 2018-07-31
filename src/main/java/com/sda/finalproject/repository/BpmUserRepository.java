@@ -11,4 +11,9 @@ public interface BpmUserRepository extends JpaRepository<BpmUser, Long> {
     int countByEmail(String email);
 
     Optional<BpmUser> findByEmail (String email);
+
+    Optional<BpmUser> findById (Long id);
+
+
+
 }

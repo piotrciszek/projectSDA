@@ -38,7 +38,7 @@ public class RegisterGui extends UI {
                             passwordField.getValue(),
                             confirmPasswordField.getValue());
                     if (userId > 0) {
-                        Page.getCurrent().open("/user-data?userId=" + userId, null);
+                        Page.getCurrent().open("/login", null);
                         Notification.show(
                                 "User added",
                                 Notification.Type.TRAY_NOTIFICATION);

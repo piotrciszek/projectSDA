@@ -1,9 +1,4 @@
-package com.sda.finalproject.configuration;/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-//package com.wordpress.kuylim.springbootvaadin.configuration;
+package com.sda.finalproject.configuration;
 
 import com.sda.finalproject.services.CustomUserDetailService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,10 +12,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.LoginUrlAuthenticationEntryPoint;
 
-/**
- *
- * @author KUYLIM
- */
+
 @Configuration
 @EnableWebSecurity
 public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
@@ -39,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/THEME", "/VAADIN/**", "/PUSH/**", "/UIDL/**", "/login", "/error/**", "/accessDenied/**", "/vaadinServlet/**").permitAll()
-                .antMatchers("/user-data").hasRole("USER")
+                .antMatchers("/user-data", "/user-list", "/user-edit").hasRole("USER")
                 .antMatchers("/register").permitAll();
 
         http.logout().logoutUrl("/logout");

@@ -16,19 +16,6 @@ public class RegisterManager {
     private BpmUserRepository bpmUserRepository;
 
 
-    //    public Optional<BpmUser> registerUser(BpmUser bpmUser) {
-//        bpmUser.setEmail(bpmUser.getEmail().toLowerCase());
-//
-//        if (bpmUser.getPassword().equals(bpmUser.getPassword_confirm())) {
-//            if (bpmUserRepository.countByEmail(bpmUser.getEmail()) <=0) {
-//
-//
-//
-//                return Optional.of(bpmUserRepository.save(bpmUser));
-//            }
-//        }
-//        return Optional.empty();
-//    }
     public Long registerPerson(String email, String password, String password_confirm) {
         if (!email.isEmpty() && !password.isEmpty() && !password_confirm.isEmpty()) {
             if (password.equals(password_confirm)) {
@@ -48,7 +35,8 @@ public class RegisterManager {
 
 
     public BpmUser getPersonById(Long id) {
-        return bpmUserRepository.getOne(id);
+//        return bpmUserRepository.getOne(id);
+        return bpmUserRepository.findById(id).get();
     }
 
 //    public Optional<BpmUser> unregisterUser(BpmUser bpmUser) {
