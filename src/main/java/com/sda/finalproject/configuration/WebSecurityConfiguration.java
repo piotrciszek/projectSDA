@@ -30,9 +30,9 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/THEME", "/VAADIN/**", "/PUSH/**", "/UIDL/**", "/login", "/error/**", "/accessDenied/**", "/vaadinServlet/**").permitAll()
-                .antMatchers("/user-data", "/user-list", "/user-edit").hasRole("USER")
-                .antMatchers("/register").permitAll();
+                .antMatchers("/THEME", "/VAADIN/**", "/PUSH/**", "/UIDL/**", "/add-task", "/task-list", "/login", "/register", "/error/**", "/accessDenied/**", "/vaadinServlet/**").permitAll()
+                .antMatchers("/user-list", "/user-data").hasRole("USER");
+
 
         http.logout().logoutUrl("/logout");
         http.csrf().disable();
