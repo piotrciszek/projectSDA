@@ -140,5 +140,8 @@ public class BpmUser implements UserDetails {
         return new BpmUser(bpmUser.getEmail(), bpmUser.getName(), bpmUser.getSurname());
     }
 
-
+    @Override
+    public String toString() {
+        return "User: " + email;
+    }
 }

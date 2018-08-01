@@ -13,8 +13,8 @@ public class StartTaskManager {
     @Autowired
     private BpmTaskRepository bpmTaskRepository;
 
-    public Optional<BpmTask> getTaskById(Long id) {
-        return bpmTaskRepository.findById(id);
+    public BpmTask getTaskById(Long id) {
+        return bpmTaskRepository.findById(id).get();
     }
 
 }
