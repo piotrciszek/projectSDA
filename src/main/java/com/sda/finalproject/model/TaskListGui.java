@@ -16,6 +16,7 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.time.LocalDateTime;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @SpringUI(path = "task-list")
 public class TaskListGui extends UI{
@@ -24,6 +25,7 @@ public class TaskListGui extends UI{
     private AddTaskManager addTaskManager;
     @Autowired
     private Menu menu;
+
 
     @Autowired
     private BpmTaskRepository bpmTaskRepository;
@@ -39,7 +41,7 @@ public class TaskListGui extends UI{
 
         verticalLayout.addComponent(menu.getMenuBar());
 
-        ListDataProvider<BpmTask> dataProvider = new ListDataProvider(addTaskManager.getTaskList());
+        ListDataProvider<BpmTask> dataProvider = new ListDataProvider(addTaskManager.getTaskList().stream().filter(element -> !element.isDone()).collect(Collectors.toList()));
         Grid<BpmTask> grid = new Grid<>();
         grid.setDataProvider(dataProvider);
         grid.setSizeFull();
@@ -50,13 +52,6 @@ public class TaskListGui extends UI{
         grid.addColumn(BpmTask::getBpmUser).setId("Kto wykonuje zadanie").setCaption("User").setExpandRatio(2);
         grid.addColumn(BpmTask::isDone).setId("Is done?").setCaption("Is done?").setExpandRatio(2);
 
-
-
-
-        //        grid.addColumn(BpmTask::getEmail).setId("Email").setCaption("Email");
-//        grid.getEditor().isEnabled();
-
-//        grid.getEditor().setBuffered(true);
 
         verticalLayout.addComponent(grid);
 
@@ -88,6 +83,19 @@ public class TaskListGui extends UI{
 
         verticalLayout.addComponent(taskId);
         verticalLayout.addComponent(startTaskButton);
+
+        ListDataProvider<BpmTask> dataProvider2 = new ListDataProvider(addTaskManager.getTaskList().stream().filter(element -> element.isDone()).collect(Collectors.toList()));
+        Grid<BpmTask> grid2 = new Grid<>();
+        grid2.setDataProvider(dataProvider2);
+        grid2.setSizeFull();
+        grid2.addColumn(BpmTask::getId).setId("Id").setCaption("Id").setExpandRatio(1);
+        grid2.addColumn(BpmTask::getTitle).setId("Title").setCaption("Title").setExpandRatio(2);
+        grid2.addColumn(BpmTask::getDescription).setId("Description").setCaption("Description").setExpandRatio(3);
+//        grid2.addColumn(BpmTask::getStartTime).setId("Time").setCaption("Start Time").setExpandRatio(3);
+        grid2.addColumn(BpmTask::getBpmUser).setId("Kto wykonał zadanie").setCaption("User").setExpandRatio(2);
+        grid2.addColumn(BpmTask::isDone).setId("Is done?").setCaption("Is done?").setExpandRatio(2);
+
+        verticalLayout.addComponent(grid2);
 
         setContent(verticalLayout);
 
