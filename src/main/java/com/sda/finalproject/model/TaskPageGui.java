@@ -50,7 +50,7 @@ public class TaskPageGui extends UI{
         TextField commentField = new TextField();
         commentField.setPlaceholder("Add Comment");
 
-        Button doneButton = new Button("Zakoncz zadania");
+        Button doneButton = new Button("Finish task");
 
         doneButton.addClickListener(event ->
                 {

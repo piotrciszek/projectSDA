@@ -55,12 +55,12 @@ public class TaskListGui extends UI{
 
         verticalLayout.addComponent(grid);
 
-        Button addTaskButton = new Button("Dodaj zadanie");
+        Button addTaskButton = new Button("Add task");
 
         addTaskButton.addClickListener(event ->
                 {
                     Page.getCurrent().open("add-task", null);
-                    Notification.show("Dodaj zadanie", Notification.Type.TRAY_NOTIFICATION);
+                    Notification.show("Add task", Notification.Type.TRAY_NOTIFICATION);
                 }
         );
 
@@ -68,7 +68,7 @@ public class TaskListGui extends UI{
 
         TextField taskId = new TextField();
         taskId.setPlaceholder("Enter task Id");
-        Button startTaskButton = new Button("Zacznij zadanie");
+        Button startTaskButton = new Button("Start task");
 
         startTaskButton.addClickListener(event ->
                 {
@@ -92,7 +92,7 @@ public class TaskListGui extends UI{
         grid2.addColumn(BpmTask::getTitle).setId("Title").setCaption("Title").setExpandRatio(2);
         grid2.addColumn(BpmTask::getDescription).setId("Description").setCaption("Description").setExpandRatio(3);
 //        grid2.addColumn(BpmTask::getStartTime).setId("Time").setCaption("Start Time").setExpandRatio(3);
-        grid2.addColumn(BpmTask::getBpmUser).setId("Kto wykonał zadanie").setCaption("User").setExpandRatio(2);
+        grid2.addColumn(BpmTask::getBpmUser).setId("User").setCaption("User").setExpandRatio(2);
         grid2.addColumn(BpmTask::isDone).setId("Is done?").setCaption("Is done?").setExpandRatio(2);
 
         verticalLayout.addComponent(grid2);
