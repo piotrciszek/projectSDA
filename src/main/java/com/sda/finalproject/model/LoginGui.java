@@ -15,6 +15,9 @@ import java.util.Optional;
 public class LoginGui extends UI {
 
     @Autowired
+    private Menu menu;
+
+    @Autowired
     private LoginManager loginManager;
 
     @Autowired
@@ -64,6 +67,8 @@ public class LoginGui extends UI {
 
 
         });
+
+        registerLayout.addComponent(menu.getMenuBar());
 
         registerLayout.addComponent(emailField);
         registerLayout.setComponentAlignment(emailField, Alignment.MIDDLE_CENTER);

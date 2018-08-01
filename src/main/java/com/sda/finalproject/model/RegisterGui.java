@@ -14,6 +14,8 @@ public class RegisterGui extends UI {
     @Autowired
     private RegisterManager registerManager;
 
+    @Autowired
+    private Menu menu;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -49,6 +51,7 @@ public class RegisterGui extends UI {
                     }
                 }
         );
+        registerLayout.addComponent(menu.getMenuBar());
 
         registerLayout.addComponent(emailField);
         registerLayout.setComponentAlignment(emailField, Alignment.MIDDLE_CENTER);

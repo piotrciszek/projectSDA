@@ -38,6 +38,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http.exceptionHandling().accessDeniedPage("/access-denied");
         http.authorizeRequests().anyRequest().permitAll();
+        http.headers().frameOptions().disable();
     }
 
 
