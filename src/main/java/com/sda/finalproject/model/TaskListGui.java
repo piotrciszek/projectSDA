@@ -11,6 +11,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
+import com.vaadin.ui.themes.ValoTheme;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
 
@@ -23,6 +24,7 @@ public class TaskListGui extends UI{
 
     @Autowired
     private AddTaskManager addTaskManager;
+
     @Autowired
     private Menu menu;
 
@@ -39,7 +41,15 @@ public class TaskListGui extends UI{
 
         VerticalLayout verticalLayout = new VerticalLayout();
 
+
+
         verticalLayout.addComponent(menu.getMenuBar());
+
+        Label label = new Label("Task to do");
+        label.addStyleName(ValoTheme.LABEL_H1);
+
+        verticalLayout.addComponent(label);
+
 
         ListDataProvider<BpmTask> dataProvider = new ListDataProvider(addTaskManager.getTaskList().stream().filter(element -> !element.isDone()).collect(Collectors.toList()));
         Grid<BpmTask> grid = new Grid<>();
@@ -55,17 +65,26 @@ public class TaskListGui extends UI{
 
         verticalLayout.addComponent(grid);
 
-        Button addTaskButton = new Button("Add task");
+        HorizontalLayout horizontalLayout = new HorizontalLayout();
 
-        addTaskButton.addClickListener(event ->
+        VerticalLayout verticalLayout2 = new VerticalLayout();
+
+        TextField taskId2 = new TextField();
+        taskId2.setPlaceholder("Enter task Id");
+
+        Button editTaskButton = new Button("Edit task");
+        editTaskButton.addClickListener(event ->
                 {
-                    Page.getCurrent().open("add-task", null);
-                    Notification.show("Add task", Notification.Type.TRAY_NOTIFICATION);
+                    Page.getCurrent().open("/edit-task?taskId=" + taskId2.getValue(), null);
+                    Notification.show("Edit task", Notification.Type.TRAY_NOTIFICATION);
                 }
         );
+        verticalLayout2.addComponent(taskId2);
+        verticalLayout2.addComponent(editTaskButton);
 
-        verticalLayout.addComponent(addTaskButton);
+        horizontalLayout.addComponent(verticalLayout2);
 
+        VerticalLayout verticalLayout3 = new VerticalLayout();
         TextField taskId = new TextField();
         taskId.setPlaceholder("Enter task Id");
         Button startTaskButton = new Button("Start task");
@@ -80,9 +99,29 @@ public class TaskListGui extends UI{
 
                 }
         );
+        verticalLayout3.addComponent(taskId);
+        verticalLayout3.addComponent(startTaskButton);
 
-        verticalLayout.addComponent(taskId);
-        verticalLayout.addComponent(startTaskButton);
+        horizontalLayout.addComponent(verticalLayout3);
+
+        verticalLayout.addComponent(horizontalLayout);
+
+        Button addTaskButton = new Button("Add task");
+
+        addTaskButton.addClickListener(event ->
+                {
+                    Page.getCurrent().open("/add-task", null);
+                    Notification.show("Add task", Notification.Type.TRAY_NOTIFICATION);
+                }
+        );
+
+        verticalLayout.addComponent(addTaskButton);
+
+
+        Label label2 = new Label("Task done");
+        label2.addStyleName(ValoTheme.LABEL_H1);
+
+        verticalLayout.addComponent(label2);
 
         ListDataProvider<BpmTask> dataProvider2 = new ListDataProvider(addTaskManager.getTaskList().stream().filter(element -> element.isDone()).collect(Collectors.toList()));
         Grid<BpmTask> grid2 = new Grid<>();

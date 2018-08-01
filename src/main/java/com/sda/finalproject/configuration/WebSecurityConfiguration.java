@@ -31,7 +31,7 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/THEME", "/VAADIN/**", "/PUSH/**", "/UIDL/**", "/", "/login", "/register", "/error/**", "/accessDenied/**", "/vaadinServlet/**").permitAll()
-                .antMatchers("/user-list", "/user-data", "/task-list", "/add-task").hasRole("USER");
+                .antMatchers("/user-list", "/user-data", "/task-list", "/add-task", "/edit-task", "/task-page").hasRole("USER");
 
 
         http.logout().logoutUrl("/logout");
