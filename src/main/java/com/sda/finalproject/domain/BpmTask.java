@@ -1,10 +1,7 @@
 package com.sda.finalproject.domain;
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
@@ -22,7 +19,17 @@ public class BpmTask {
     private LocalDateTime endTime;
     private boolean done;
 
+    @ManyToOne
+    @JoinColumn(name = "user_email")
+    private BpmUser bpmUser;
 
+    public BpmUser getBpmUser() {
+        return bpmUser;
+    }
+
+    public void setBpmUser(BpmUser bpmUser) {
+        this.bpmUser = bpmUser;
+    }
 
     public LocalDateTime getStartTime() {
         return startTime;
