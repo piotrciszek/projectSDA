@@ -22,7 +22,8 @@ public class TaskListGui extends UI{
 
     @Autowired
     private AddTaskManager addTaskManager;
-
+    @Autowired
+    private Menu menu;
 
     @Autowired
     private BpmTaskRepository bpmTaskRepository;
@@ -35,6 +36,8 @@ public class TaskListGui extends UI{
         BpmUser bpmUser = (BpmUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 
         VerticalLayout verticalLayout = new VerticalLayout();
+
+        verticalLayout.addComponent(menu.getMenuBar());
 
         ListDataProvider<BpmTask> dataProvider = new ListDataProvider(addTaskManager.getTaskList());
         Grid<BpmTask> grid = new Grid<>();
