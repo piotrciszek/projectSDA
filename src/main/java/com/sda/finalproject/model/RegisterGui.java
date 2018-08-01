@@ -52,7 +52,6 @@ public class RegisterGui extends UI {
                 }
         );
         registerLayout.addComponent(menu.getMenuBar());
-
         registerLayout.addComponent(emailField);
         registerLayout.setComponentAlignment(emailField, Alignment.MIDDLE_CENTER);
         registerLayout.addComponent(passwordField);

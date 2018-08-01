@@ -3,12 +3,15 @@ package com.sda.finalproject.model;
 import com.sda.finalproject.domain.BpmUser;
 import com.sda.finalproject.manger.LoginManager;
 import com.sda.finalproject.security.ISecurity;
+import com.vaadin.server.FileResource;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
+import com.vaadin.server.VaadinService;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.io.File;
 import java.util.Optional;
 
 @SpringUI(path = "/login")
@@ -67,9 +70,7 @@ public class LoginGui extends UI {
 
 
         });
-
         registerLayout.addComponent(menu.getMenuBar());
-
         registerLayout.addComponent(emailField);
         registerLayout.setComponentAlignment(emailField, Alignment.MIDDLE_CENTER);
         registerLayout.addComponent(passwordField);
@@ -78,8 +79,6 @@ public class LoginGui extends UI {
         registerLayout.setComponentAlignment(loginButton, Alignment.MIDDLE_CENTER);
 
         setContent(registerLayout);
-
-
 
 
     }

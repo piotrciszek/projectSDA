@@ -17,6 +17,9 @@ public class UserListGui extends UI {
     @Autowired
     private RegisterManager registerManager;
 
+    @Autowired
+    private Menu menu;
+
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -41,6 +44,7 @@ public class UserListGui extends UI {
 
 
         });
+        verticalLayout.addComponent(menu.getMenuBar());
         verticalLayout.addComponent(grid);
         verticalLayout.addComponent(editButton);
         setContent(verticalLayout);

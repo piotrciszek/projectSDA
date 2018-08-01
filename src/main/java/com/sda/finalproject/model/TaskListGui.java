@@ -8,6 +8,7 @@ import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
 import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
+import com.vaadin.ui.renderers.ButtonRenderer;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDateTime;
@@ -15,6 +16,9 @@ import java.util.Optional;
 
 @SpringUI(path = "task-list")
 public class TaskListGui extends UI{
+
+    @Autowired
+    private Menu menu;
 
     @Autowired
     private AddTaskManager addTaskManager;
@@ -26,6 +30,7 @@ public class TaskListGui extends UI{
     protected void init(VaadinRequest vaadinRequest) {
 
         VerticalLayout verticalLayout = new VerticalLayout();
+        verticalLayout.addComponent(menu.getMenuBar());
 
         ListDataProvider<BpmTask> dataProvider = new ListDataProvider(addTaskManager.getTaskList());
         Grid<BpmTask> grid = new Grid<>();
@@ -36,6 +41,7 @@ public class TaskListGui extends UI{
         grid.addColumn(BpmTask::getDescription).setId("Description").setCaption("Description").setExpandRatio(3);
         grid.addColumn(BpmTask::getStartTime).setId("Start Time").setCaption("Start Time").setExpandRatio(3);
         grid.addColumn(BpmTask::isDone).setId("Is done?").setCaption("Is done?").setExpandRatio(2);
+
 
         //        grid.addColumn(BpmTask::getEmail).setId("Email").setCaption("Email");
 //        grid.getEditor().isEnabled();

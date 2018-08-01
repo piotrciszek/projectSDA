@@ -13,8 +13,12 @@ import org.springframework.security.core.context.SecurityContextHolder;
 
 import java.security.Principal;
 
+
 @SpringUI(path = "/user-edit")
 public class UserEditGui extends UI {
+
+    @Autowired
+    private Menu menu;
 
     @Autowired
     private BpmUserRepository bpmUserRepository;

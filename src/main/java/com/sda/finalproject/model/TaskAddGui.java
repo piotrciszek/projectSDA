@@ -14,11 +14,15 @@ import java.time.LocalDateTime;
 public class TaskAddGui extends UI{
 
     @Autowired
+    private Menu menu;
+
+    @Autowired
     private AddTaskManager addTaskManager;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
         HorizontalLayout addTaskLayout = new HorizontalLayout();
+        VerticalLayout verticalLayout = new VerticalLayout();
 
         addTaskLayout.addStyleName("outlined");
         addTaskLayout.setSpacing(true);
@@ -43,12 +47,12 @@ public class TaskAddGui extends UI{
             Notification.show("TaskAdded", Notification.Type.TRAY_NOTIFICATION);
 
         });
-
+        verticalLayout.addComponent(menu.getMenuBar());
         addTaskLayout.addComponent(taskTitle);
         addTaskLayout.addComponent(taskDescription);
         addTaskLayout.addComponent(addTaskButton);
-
-        setContent(addTaskLayout);
+        verticalLayout.addComponent(addTaskLayout);
+        setContent(verticalLayout);
 
     }
 }
