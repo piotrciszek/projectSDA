@@ -30,13 +30,13 @@ public class WebSecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/THEME", "/VAADIN/**", "/PUSH/**", "/UIDL/**", "/add-task", "/task-list", "/login", "/register", "/error/**", "/accessDenied/**", "/vaadinServlet/**").permitAll()
-                .antMatchers("/user-list", "/user-data").hasRole("USER");
+                .antMatchers("/THEME", "/VAADIN/**", "/PUSH/**", "/UIDL/**", "/", "/login", "/register", "/error/**", "/accessDenied/**", "/vaadinServlet/**").permitAll()
+                .antMatchers("/user-list", "/user-data", "/task-list", "/add-task").hasRole("USER");
 
 
         http.logout().logoutUrl("/logout");
         http.csrf().disable();
-        http.exceptionHandling().accessDeniedPage("/access-denied");
+        http.exceptionHandling().accessDeniedPage("/register");
         http.authorizeRequests().anyRequest().permitAll();
         http.headers().frameOptions().disable();
     }

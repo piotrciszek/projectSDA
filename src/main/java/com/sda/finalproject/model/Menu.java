@@ -26,18 +26,20 @@ public class Menu {
         MenuBar.Command menuCommand3 = selectedItem -> Page.getCurrent().setLocation("/logout");
         MenuBar.Command menuCommand4 = selectedItem -> Page.getCurrent().setLocation("/add-task");
         MenuBar.Command menuCommand5 = selectedItem -> Page.getCurrent().setLocation("/task-list");
+        MenuBar.Command menuCommand6 = selectedItem -> Page.getCurrent().setLocation("/user-list");
 
         if(isAnonymous){
-            menuBar.addItem("Strona Główna", menuCommand);
-            menuBar.addItem("Rejestracja", menuCommand1);
-            menuBar.addItem("Logowanie", menuCommand2);
+            menuBar.addItem("Home", menuCommand);
+            menuBar.addItem("Registry", menuCommand1);
+            menuBar.addItem("Login", menuCommand2);
         }
 
         if (!isAnonymous) {
-            menuBar.addItem("Strona Główna", menuCommand);
-            menuBar.addItem("Dodaj Zadanie", menuCommand4);
-            menuBar.addItem("Lista Zadań", menuCommand5);
-            menuBar.addItem("Wyloguj", menuCommand3);
+            menuBar.addItem("Home", menuCommand);
+            menuBar.addItem("User List", menuCommand6);
+            menuBar.addItem("Add Task", menuCommand4);
+            menuBar.addItem("Tasks List", menuCommand5);
+            menuBar.addItem("Logout", menuCommand3);
 
 
         }

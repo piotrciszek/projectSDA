@@ -71,7 +71,7 @@ public class UserEditGui extends UI {
 
         });
 
-
+        verticalLayout.addComponent(menu.getMenuBar());
         verticalLayout.addComponent(textName);
         verticalLayout.addComponent(textSurname);
         verticalLayout.addComponent(textEmail);
