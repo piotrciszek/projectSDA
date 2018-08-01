@@ -2,6 +2,7 @@ package com.sda.finalproject.model;
 
 import com.sda.finalproject.domain.BpmTask;
 import com.sda.finalproject.manger.AddTaskManager;
+import com.sda.finalproject.manger.StartTaskManager;
 import com.vaadin.data.provider.ListDataProvider;
 import com.vaadin.server.Page;
 import com.vaadin.server.VaadinRequest;
@@ -9,11 +10,17 @@ import com.vaadin.spring.annotation.SpringUI;
 import com.vaadin.ui.*;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import java.time.LocalDateTime;
+import java.util.Optional;
+
 @SpringUI(path = "task-list")
 public class TaskListGui extends UI{
 
     @Autowired
     private AddTaskManager addTaskManager;
+
+    @Autowired
+    private StartTaskManager startTaskManager;
 
     @Override
     protected void init(VaadinRequest vaadinRequest) {
@@ -27,6 +34,7 @@ public class TaskListGui extends UI{
         grid.addColumn(BpmTask::getId).setId("Id").setCaption("Id").setExpandRatio(1);
         grid.addColumn(BpmTask::getTitle).setId("Title").setCaption("Title").setExpandRatio(2);
         grid.addColumn(BpmTask::getDescription).setId("Description").setCaption("Description").setExpandRatio(3);
+        grid.addColumn(BpmTask::getStartTime).setId("Start Time").setCaption("Start Time").setExpandRatio(3);
         grid.addColumn(BpmTask::isDone).setId("Is done?").setCaption("Is done?").setExpandRatio(2);
 
         //        grid.addColumn(BpmTask::getEmail).setId("Email").setCaption("Email");
@@ -47,15 +55,18 @@ public class TaskListGui extends UI{
 
         verticalLayout.addComponent(addTaskButton);
 
-//        TextField taskId = new TextField();
-//        taskId.setValue("Enter task Id");
-//        Button editTaskButton = new Button("Zacznij zadanie");
-//
-//        addTaskButton.addClickListener(event ->
-//                {
-//                    Optional<BpmTask> taskbyId =
-//                }
-//        )
+        TextField taskId = new TextField();
+        taskId.setValue("Enter task Id");
+        Button editTaskButton = new Button("Zacznij zadanie");
+
+        editTaskButton.addClickListener(event ->
+                {
+                    Optional<BpmTask> taskToDo = startTaskManager.getTaskById(Long.valueOf(taskId.getValue()));
+                    taskToDo.get().setStartTime(LocalDateTime.now());
+                    Page.getCurrent().open("/task-list", null);
+
+                }
+        );
 
         setContent(verticalLayout);
 

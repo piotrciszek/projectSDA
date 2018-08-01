@@ -18,7 +18,27 @@ public class BpmTask {
     private String description;
     private String comment;
     private LocalDateTime addTime;
+    private LocalDateTime startTime;
+    private LocalDateTime endTime;
     private boolean done;
+
+
+
+    public LocalDateTime getStartTime() {
+        return startTime;
+    }
+
+    public void setStartTime(LocalDateTime startTime) {
+        this.startTime = startTime;
+    }
+
+    public LocalDateTime getEndTime() {
+        return endTime;
+    }
+
+    public void setEndTime(LocalDateTime endTime) {
+        this.endTime = endTime;
+    }
 
     public BpmTask(String title, String description, LocalDateTime addTime) {
         this.title = title;
